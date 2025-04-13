@@ -1,12 +1,31 @@
+<!DOCTYPE html>
 <html>
 <head>
+  <title>You are on my site!</title>
+  <style>
+    body {
+      margin: 0;
+      background-image: url("../background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .big-image {
+      height: 75vh;         /* 75% of the screen height */
+      width: auto;          /* keep aspect ratio */
+      max-width: 100%;      /* don’t overflow horizontally */
+      margin-bottom: 20px;  /* space between images (optional) */
+      object-fit: contain;  /* show entire image, even if smaller */
+    }
+  </style>
 </head>
 <body>
-  <title>You are on my site!</title>
-  background-image: url("../background.jpg")
-  <img width=100% src="../welcome.png" />
-  <img width=100% src="../diego.png" />
-  <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
+  <img class="big-image" src="../welcome.png" />
+  <img class="big-image" src="../diego.png" />
+  <img class="big-image" src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
 </body>
-
 </html>
