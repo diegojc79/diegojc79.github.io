@@ -2,18 +2,19 @@
 <html>
 <head>
   <title>You are on my site!</title>
-  <style>
+    <style>
     body {
       margin: 0;
+      padding: 20px 0;
       background-image: url("../background.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      background-attachment: fixed; /* this keeps it from moving on scroll */
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px; /* spacing between images */
-      padding: 20px 0;
+      gap: 20px;
     }
 
     .big-image {
