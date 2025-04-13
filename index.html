@@ -2,11 +2,13 @@
 <html>
 <head>
   <title>You are on my site!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
+      overflow: hidden; /* prevents rubber-band scrolling */
     }
 
     body {
@@ -14,13 +16,13 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      background-attachment: sticky;
+      position: fixed; /* keeps it truly fixed on mobile */
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-evenly; /* even vertical spacing */
+      justify-content: space-evenly;
     }
-
     .big-image {
       width: 70vw;         /* 70% of the screen width */
       height: auto;        /* keep image aspect ratio */
