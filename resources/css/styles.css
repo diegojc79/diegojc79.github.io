@@ -59,7 +59,7 @@ nav {
   .nav-center {
     justify-content: center; /* <<< Center the container content on mobile */
   }
-  .slogan {
+  .slogan, .slogan h1 {
     text-align: center;
     padding-right: 0;
   }
