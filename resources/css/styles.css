@@ -69,7 +69,5 @@ nav {
 @media only screen and (min-width: 900px) {
   .slogan, .slogan h1 {
     font-size: 1.5rem;
-    text-align: center;
-    padding-right: 0;
   }
 }
