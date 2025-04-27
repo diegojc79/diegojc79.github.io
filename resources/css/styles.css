@@ -61,15 +61,14 @@ nav {
   }
   .slogan,
   .slogan h1 {
-    font-size: 4.5vw;
     text-align: center;
     padding-right: 0;
   }
 }
 
-/* @media only screen and (min-width: 900px) { */
-/* .slogan, */
-/* .slogan h1 { */
-/* font-size: 1.5rem; */
-/* } */
-/* } */
+@media only screen and (max-width: 965px) {
+  .slogan,
+  .slogan h1 {
+    font-size: 4.5vw;
+  }
+}
