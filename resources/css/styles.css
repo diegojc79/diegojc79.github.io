@@ -5,7 +5,6 @@ html, body {
 }
 
 body {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +12,7 @@ body {
 }
 
 nav {
-  background-image: url("resources/images/background.jpg");
+  background-image: url("../images/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -24,6 +23,7 @@ nav {
   left: 0;
   display: flex;
   align-items: center;
+  justify-content: flex-start; /* <<< left-align items */
   padding: 0 20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
   z-index: 1000;
@@ -31,16 +31,12 @@ nav {
 
 .logo {
   height: 100px;
-  width: auto;
+  width: auto; /* keeps aspect ratio */
 }
 
 .content {
-  margin-top: 120px; /* creates space so content isn't hidden under navbar */
+  margin-top: 120px; /* so your page content doesn't get hidden under navbar */
   width: 90%;
   max-width: 1000px;
   text-align: center;
-}
-
-.slogan {
-  text-align: right;
 }
