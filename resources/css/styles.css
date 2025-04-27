@@ -35,8 +35,9 @@ nav {
 }
 
 .content {
-  margin-top: 120px; /* so your page content doesn't get hidden under navbar */
+  margin-top: 120px; /* leaves space below fixed navbar */
   width: 90%;
   max-width: 1000px;
-  text-align: center;
+  text-align: right; /* <<< align text to the right */
 }
+
