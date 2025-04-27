@@ -1,43 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>"Ctrl+C, Ctrl+V — But Better"</title>
+  <title>Ctrl+C, Ctrl+V — But Better</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-/*       overflow: hidden; /* prevents rubber-band scrolling */ */
-    }
-
-    body {
-      background-image: url("../background.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-/*       position: fixed; /* keeps it truly fixed on mobile */ */
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-    }
-    .big-image {
-      width: 85vw;         /* 85% of the screen width */
-      height: auto;        /* keep image aspect ratio */
-      display: block;
-    }
-     .small-image {
-      width: 25vw;         /* 25% of the screen width */
-      height: auto;        /* keep image aspect ratio */
-      display: block;
-    }
-  </style>
+  <link rel="stylesheet" href="resources/css/styles.css">
 </head>
 <body>
-<!--   <img class="big-image" src="../welcome.png" /> -->
-  <img class="big-image" src="../diego.png" />
-  <img class="small-image" src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
+
+  <nav>
+    <img class="logo" src="../diego.png" alt="Logo">
+  </nav>
+
+  <div class="content">
+    <!-- Your page content here -->
+    <h1>Welcome to my site!</h1>
+    <p>Here’s where the magic happens.</p>
+  </div>
+
 </body>
 </html>
