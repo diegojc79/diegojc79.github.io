@@ -22,20 +22,32 @@ body {
     text-align: center;
 }
 
+.images-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: end;
+    gap: 40px;
+    margin-bottom: 10px;
+}
+
 .name-img {
     width: 280px;
     max-width: 100%;
     height: auto;
-    margin-bottom: 20px;
 }
 
 .headshot {
     width: 180px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid #007BFF;
-    margin-bottom: 15px;
+    max-width: 100%;
+    height: auto;
+    /* No border, no circle, show as-is */
+}
+
+.divider {
+    margin: 25px auto 25px auto;
+    border-bottom: 4px solid #000;
+    width: 80%;
 }
 
 .slogan {
@@ -46,6 +58,26 @@ body {
 .coming-soon {
     color: #777;
     font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.contact-info {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.contact-info h3 {
+    margin-bottom: 15px;
+}
+
+.contact-info a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
 }
 
 footer {
