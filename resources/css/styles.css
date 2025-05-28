@@ -28,7 +28,7 @@ body {
     justify-content: center;
     align-items: flex-end;
     gap: 40px;
-    margin-bottom: 0;  /* No margin below, headshot touches divider */
+    margin-bottom: 0;
 }
 
 .name-img {
@@ -45,7 +45,7 @@ body {
     border-radius: 0 !important;
     box-shadow: none !important;
     background: none !important;
-    margin-bottom: 0;  /* No margin, flush with divider */
+    margin-bottom: 0;
     display: block;
 }
 
@@ -55,7 +55,7 @@ hr.divider {
     border: none;
     border-bottom: 4px solid #000;
     width: 80%;
-    margin: 0 auto 25px auto; /* Top margin 0: touches images; bottom margin for space below */
+    margin: 0 auto 25px auto;
     height: 0;
     background: none;
     padding: 0;
@@ -115,4 +115,19 @@ footer {
     margin-top: 35px;
     color: #aaa;
     font-size: 0.9rem;
+}
+
+/* -------- Responsive layout for mobile devices -------- */
+@media (max-width: 600px) {
+    .images-row {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        margin-bottom: 0;
+    }
+    .name-img,
+    .headshot {
+        margin: 0 auto;
+        display: block;
+    }
 }
