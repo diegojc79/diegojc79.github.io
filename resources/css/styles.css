@@ -26,7 +26,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     gap: 40px;
     margin-bottom: 10px;
 }
@@ -41,13 +41,23 @@ body {
     width: 180px;
     max-width: 100%;
     height: auto;
-    /* No border, no circle, show as-is */
+    /* Remove ALL border and border-radius to ensure square display */
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: none !important;
 }
 
-.divider {
-    margin: 25px auto 25px auto;
+.divider,
+hr.divider {
+    display: block;
+    border: none;
     border-bottom: 4px solid #000;
     width: 80%;
+    margin: 25px auto 25px auto;
+    height: 0;
+    background: none;
+    padding: 0;
 }
 
 .slogan {
