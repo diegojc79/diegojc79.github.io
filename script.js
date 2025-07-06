@@ -149,7 +149,7 @@ window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
         navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 204, 51, 0.3)';
+        navbar.style.boxShadow = '0 2px 20px rgba(74, 157, 74, 0.2)';
     } else {
         navbar.style.background = 'rgba(10, 10, 10, 0.95)';
         navbar.style.boxShadow = 'none';
@@ -301,7 +301,7 @@ function createMatrixRain() {
         ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = '#00cc33';
+        ctx.fillStyle = '#4a9d4a';
         ctx.font = fontSize + 'px monospace';
         
         for (let i = 0; i < drops.length; i++) {
@@ -382,15 +382,15 @@ document.querySelectorAll('button, .action-btn, .nav-link').forEach(element => {
 const style = document.createElement('style');
 style.textContent = `
     .nav-link.active {
-        background: #00cc33 !important;
+        background: #4a9d4a !important;
         color: #0a0a0a !important;
-        box-shadow: 0 0 10px #00cc33 !important;
+        box-shadow: 0 0 8px #4a9d4a !important;
     }
     
     .terminal-alert .close-alert {
         background: transparent;
-        border: 1px solid #00cc33;
-        color: #00cc33;
+        border: 1px solid #4a9d4a;
+        color: #4a9d4a;
         padding: 8px 16px;
         margin-top: 15px;
         cursor: pointer;
@@ -400,7 +400,7 @@ style.textContent = `
     }
     
     .terminal-alert .close-alert:hover {
-        background: #00cc33;
+        background: #4a9d4a;
         color: #0a0a0a;
     }
     
@@ -412,7 +412,7 @@ style.textContent = `
     }
     
     .alert-output {
-        color: #00cc33;
+        color: #4a9d4a;
         margin-bottom: 15px;
         padding-left: 20px;
     }
