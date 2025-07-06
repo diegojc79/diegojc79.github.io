@@ -1,4 +1,5 @@
-// Terminal Portfolio JavaScript
+// Terminal Portfolio JavaScript - Static Version
+// Diego Cordeiro - Full Stack Developer
 
 const ASCII_LOGO = `
 ██████╗ ██╗███████╗ ██████╗  ██████╗      ██████╗ ██████╗ ██████╗ ██████╗ ███████╗██╗██████╗  ██████╗ 
@@ -56,7 +57,6 @@ const PROJECTS = [
 ]
 
 let isLoading = true
-const currentInput = ""
 const commandHistory = []
 let historyIndex = -1
 
@@ -348,7 +348,7 @@ function showPortrait() {
 
   output.appendChild(portraitDiv)
 
-  // Simulate loading
+  // Simulate loading with progress
   const phases = [
     "Loading portrait...",
     "█░░░░░░░░░░ 10%",
@@ -386,31 +386,43 @@ function openContactForm() {
 
 function closeContactForm() {
   document.getElementById("contactModal").style.display = "none"
+  // Reset form content
+  const content = document.getElementById("contactContent")
+  content.innerHTML = `
+    <form id="contactForm" class="space-y-4">
+      <input type="text" name="name" placeholder="Your Name" required class="w-full bg-black border border-green-500/30 text-green-400 placeholder:text-green-600 p-3 rounded">
+      <input type="email" name="email" placeholder="Your Email" required class="w-full bg-black border border-green-500/30 text-green-400 placeholder:text-green-600 p-3 rounded">
+      <input type="text" name="subject" placeholder="Subject" required class="w-full bg-black border border-green-500/30 text-green-400 placeholder:text-green-600 p-3 rounded">
+      <textarea name="message" placeholder="Your Message" required rows="4" class="w-full bg-black border border-green-500/30 text-green-400 placeholder:text-green-600 p-3 rounded resize-none"></textarea>
+      <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-black font-semibold py-3 rounded">Send Message</button>
+    </form>
+  `
+  // Re-attach event listener
+  document.getElementById("contactForm").addEventListener("submit", (e) => {
+    e.preventDefault()
+    submitContactForm()
+  })
 }
 
 function submitContactForm() {
-  const form = document.getElementById("contactForm")
   const content = document.getElementById("contactContent")
 
   content.innerHTML = `
-        <div class="text-center py-8">
-            <div class="text-green-400 text-lg mb-2">Sending...</div>
-        </div>
-    `
+    <div class="text-center py-8">
+      <div class="text-green-400 text-lg mb-2">Sending...</div>
+    </div>
+  `
 
   setTimeout(() => {
     content.innerHTML = `
-            <div class="text-center py-8">
-                <div class="text-green-400 text-lg mb-2">✓ Message Sent Successfully!</div>
-                <div class="text-green-300 text-sm">Thank you for reaching out. I'll get back to you soon.</div>
-            </div>
-        `
+      <div class="text-center py-8">
+        <div class="text-green-400 text-lg mb-2">✓ Message Sent Successfully!</div>
+        <div class="text-green-300 text-sm">Thank you for reaching out. I'll get back to you soon.</div>
+      </div>
+    `
 
     setTimeout(() => {
       closeContactForm()
-      // Reset form
-      form.reset()
-      content.innerHTML = document.querySelector("#contactModal .bg-gray-900").innerHTML
     }, 2000)
   }, 1500)
 }
@@ -432,3 +444,6 @@ function scrollToBottom() {
 
 // Keep input focused
 document.addEventListener("click", focusInput)
+
+// Prevent context menu on right click for better terminal feel
+document.addEventListener("contextmenu", (e) => e.preventDefault())
