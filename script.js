@@ -11,6 +11,31 @@ const ASCII_LOGO = `
                                    FULL STACK DEVELOPER
 `
 
+const ASCII_LOGO_MOBILE = `
+██████╗ ██╗███████╗ ██████╗  ██████╗ 
+██╔══██╗██║██╔════╝██╔════╝ ██╔═══██╗
+██║  ██║██║█████╗  ██║  ███╗██║   ██║
+██║  ██║██║██╔══╝  ██║   ██║██║   ██║
+██████╔╝██║███████╗╚██████╔╝╚██████╔╝
+╚═════╝ ╚═╝╚══════╝ ╚═════╝  ╚═════╝ 
+
+ ██████╗ ██████╗ ██████╗ ██████╗ ███████╗██╗██████╗  ██████╗ 
+██╔════╝██╔═══██╗██╔══██╗██╔══██╗██╔════╝██║██╔══██╗██╔═══██╗
+██║     ██║   ██║██████╔╝██║  ██║█████╗  ██║██████╔╝██║   ██║
+██║     ██║   ██║██╔══██╗██║  ██║██╔══╝  ██║██╔══██╗██║   ██║
+╚██████╗╚██████╔╝██║  ██║██████╔╝███████╗██║██║  ██║╚██████╔╝
+ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝╚═╝  ╚═╝ ╚═════╝ 
+                    FULL STACK DEVELOPER
+`
+
+function isMobile() {
+  return window.innerWidth <= 768
+}
+
+function getCurrentLogo() {
+  return isMobile() ? ASCII_LOGO_MOBILE : ASCII_LOGO
+}
+
 const COMMANDS = {
   help: "Show available commands",
   about: "Display information about me",
@@ -101,6 +126,39 @@ function setupEventListeners() {
     e.preventDefault()
     submitContactForm()
   })
+
+  // Mobile touch improvements
+  if ("ontouchstart" in window) {
+    document.addEventListener("touchstart", focusInput)
+
+    // Prevent zoom on double tap
+    let lastTouchEnd = 0
+    document.addEventListener(
+      "touchend",
+      (event) => {
+        const now = new Date().getTime()
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault()
+        }
+        lastTouchEnd = now
+      },
+      false,
+    )
+  }
+
+  // Handle window resize for responsive logo
+  window.addEventListener("resize", () => {
+    // Update logo if terminal is already loaded
+    if (!isLoading) {
+      const output = document.getElementById("output")
+      const logoElements = output.querySelectorAll("div")
+      logoElements.forEach((el) => {
+        if (el.textContent.includes("██████╗")) {
+          el.textContent = getCurrentLogo()
+        }
+      })
+    }
+  })
 }
 
 function startBootSequence() {
@@ -133,7 +191,7 @@ function startBootSequence() {
     { type: "command", content: "$ echo 'Welcome to the matrix...'", delay: 500 },
     { type: "output", content: "Welcome to the matrix...", delay: 400 },
     { type: "system", content: "", delay: 300 },
-    { type: "output", content: ASCII_LOGO, delay: 800 },
+    { type: "output", content: getCurrentLogo(), delay: 800 },
     { type: "system", content: 'Type "help" to see available commands or "about" to learn more about me.', delay: 400 },
     { type: "output", content: "", delay: 100 },
   ]
@@ -165,6 +223,12 @@ function addLine(type, content) {
   const line = document.createElement("div")
 
   line.className = `whitespace-pre-wrap break-words ${getLineClass(type)}`
+
+  // Add mobile-specific class for ASCII art
+  if (content.includes("██████╗")) {
+    line.className += " ascii-logo"
+  }
+
   line.textContent = content
 
   output.appendChild(line)
@@ -333,7 +397,7 @@ function clearTerminal() {
   // Add header
   addLine("system", "BIOS v2.1.0 - Diego Cordeiro Portfolio System")
   addLine("system", "System ready. Welcome to the matrix.")
-  addLine("output", ASCII_LOGO)
+  addLine("output", getCurrentLogo())
   addLine("system", 'Type "help" to see available commands or "about" to learn more about me.')
   addLine("output", "")
 }
