@@ -486,7 +486,7 @@ function showPortrait() {
       };
 
       // Start loading the image
-      testImage.src = 'publicprofile.png';
+      testImage.src = 'public/profile.png';
     }
   }, 200);
 
