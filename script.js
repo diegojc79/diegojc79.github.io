@@ -1,5 +1,119 @@
-// Dynamically updates the year in the footer
+// Terminal Loading Animation
+const loadingTexts = [
+    'Initializing system...',
+    'Loading modules...',
+    'Connecting to server...',
+    'Authenticating user...',
+    'Loading portfolio data...',
+    'Rendering interface...',
+    'System ready!'
+];
+
+let currentTextIndex = 0;
+let currentCharIndex = 0;
+const loadingTextElement = document.getElementById('loading-text');
+const loadingScreen = document.getElementById('loading-screen');
+
+function typeLoadingText() {
+    if (currentTextIndex < loadingTexts.length) {
+        const currentText = loadingTexts[currentTextIndex];
+        
+        if (currentCharIndex < currentText.length) {
+            loadingTextElement.textContent += currentText[currentCharIndex];
+            currentCharIndex++;
+            setTimeout(typeLoadingText, 50);
+        } else {
+            setTimeout(() => {
+                loadingTextElement.textContent += '\n';
+                currentTextIndex++;
+                currentCharIndex = 0;
+                if (currentTextIndex < loadingTexts.length) {
+                    setTimeout(typeLoadingText, 200);
+                } else {
+                    setTimeout(hideLoadingScreen, 1000);
+                }
+            }, 500);
+        }
+    }
+}
+
+function hideLoadingScreen() {
+    loadingScreen.classList.add('hidden');
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        startHeroTyping();
+    }, 500);
+}
+
+// Start loading animation
+window.addEventListener('load', () => {
+    setTimeout(typeLoadingText, 500);
+});
+
+// Hero Terminal Typing Animation
+const commands = [
+    'cat welcome.txt',
+    'ls -la projects/',
+    'git status',
+    'npm run dev',
+    'echo "Ready to code!"'
+];
+
+let commandIndex = 0;
+let charIndex = 0;
+const typingElement = document.getElementById('typing-command');
+
+function startHeroTyping() {
+    if (typingElement) {
+        typeCommand();
+    }
+}
+
+function typeCommand() {
+    if (commandIndex < commands.length) {
+        const currentCommand = commands[commandIndex];
+        
+        if (charIndex < currentCommand.length) {
+            typingElement.textContent += currentCommand[charIndex];
+            charIndex++;
+            setTimeout(typeCommand, 100);
+        } else {
+            setTimeout(() => {
+                typingElement.textContent = '';
+                commandIndex++;
+                charIndex = 0;
+                if (commandIndex >= commands.length) {
+                    commandIndex = 0; // Loop back to start
+                }
+                setTimeout(typeCommand, 1000);
+            }, 2000);
+        }
+    }
+}
+
+// Uptime Counter
+function updateUptime() {
+    const startTime = new Date('2021-01-01'); // Adjust to your actual start date
+    const now = new Date();
+    const diff = now - startTime;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    const uptimeElement = document.getElementById('uptime');
+    if (uptimeElement) {
+        uptimeElement.textContent = `${days}d ${hours}h ${minutes}m`;
+    }
+}
+
+// Update uptime every minute
+setInterval(updateUptime, 60000);
+updateUptime();
+
+// Year updates
 document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('year-output').textContent = new Date().getFullYear();
 
 // Mobile Navigation Toggle
 const navToggle = document.getElementById('nav-toggle');
@@ -34,10 +148,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0, 255, 65, 0.3)';
     } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        navbar.style.background = 'rgba(10, 10, 10, 0.95)';
         navbar.style.boxShadow = 'none';
     }
 });
@@ -64,7 +178,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Contact form handling
+// Contact form handling with terminal-style feedback
 const contactForm = document.getElementById('contact-form');
 contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -78,34 +192,142 @@ contactForm.addEventListener('submit', function(e) {
     
     // Simple form validation
     if (!name || !email || !subject || !message) {
-        alert('Please fill in all fields.');
+        showTerminalAlert('Error: All fields are required!', 'error');
         return;
     }
     
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address.');
+        showTerminalAlert('Error: Invalid email format!', 'error');
         return;
     }
     
-    // Simulate form submission (replace with actual form handling)
+    // Simulate form submission
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const originalText = submitButton.innerHTML;
     
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Executing...';
     submitButton.disabled = true;
     
     // Simulate API call
     setTimeout(() => {
-        alert('Thank you for your message! I\'ll get back to you soon.');
+        showTerminalAlert('Message sent successfully! I\'ll get back to you soon.', 'success');
         contactForm.reset();
         submitButton.innerHTML = originalText;
         submitButton.disabled = false;
     }, 2000);
 });
 
-// Intersection Observer for animations
+// Terminal-style alert system
+function showTerminalAlert(message, type = 'info') {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `terminal-alert ${type}`;
+    alertDiv.innerHTML = `
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="btn-close"></span>
+                    <span class="btn-minimize"></span>
+                    <span class="btn-maximize"></span>
+                </div>
+                <span class="terminal-title">system-alert.sh</span>
+            </div>
+            <div class="terminal-body">
+                <div class="alert-content">
+                    <span class="prompt">system@alert:~$</span>
+                    <span class="command">echo "${message}"</span>
+                </div>
+                <div class="alert-output">${message}</div>
+                <button class="close-alert" onclick="this.parentElement.parentElement.parentElement.remove()">
+                    [Press any key to continue]
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Style the alert
+    alertDiv.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+        max-width: 500px;
+        width: 90%;
+    `;
+    
+    document.body.appendChild(alertDiv);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (alertDiv.parentElement) {
+            alertDiv.remove();
+        }
+    }, 5000);
+}
+
+// Matrix rain effect (optional - can be enabled for extra cyberpunk feel)
+function createMatrixRain() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '-1';
+    canvas.style.opacity = '0.1';
+    
+    document.body.appendChild(canvas);
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    const charArray = chars.split('');
+    
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+    
+    for (let i = 0; i < columns; i++) {
+        drops[i] = 1;
+    }
+    
+    function draw() {
+        ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#00ff41';
+        ctx.font = fontSize + 'px monospace';
+        
+        for (let i = 0; i < drops.length; i++) {
+            const text = charArray[Math.floor(Math.random() * charArray.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        }
+    }
+    
+    setInterval(draw, 35);
+    
+    // Resize handler
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
+
+// Uncomment the line below to enable matrix rain effect
+// createMatrixRain();
+
+// Intersection Observer for terminal window animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -120,47 +342,79 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
-document.querySelectorAll('.skill-category, .project-card, .about-content > *, .contact-content > *').forEach(el => {
+// Observe terminal windows for animation
+document.querySelectorAll('.terminal-window').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
 
-// Typing animation for hero title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
+// Add some terminal sound effects (optional)
+function playTerminalSound() {
+    // Create a simple beep sound using Web Audio API
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
     
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
     
-    type();
+    oscillator.frequency.value = 800;
+    oscillator.type = 'square';
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
 }
 
-// Initialize typing animation when page loads
-window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        typeWriter(heroTitle, originalText, 50);
-    }
+// Add click sound to buttons (optional)
+document.querySelectorAll('button, .action-btn, .nav-link').forEach(element => {
+    element.addEventListener('click', () => {
+        // Uncomment to enable sound effects
+        // playTerminalSound();
+    });
 });
 
-// Add CSS class for active nav links
+// Add CSS for active nav links
 const style = document.createElement('style');
 style.textContent = `
     .nav-link.active {
-        color: #2563eb !important;
+        background: #00ff41 !important;
+        color: #0a0a0a !important;
+        box-shadow: 0 0 10px #00ff41 !important;
     }
-    .nav-link.active::after {
-        width: 100% !important;
+    
+    .terminal-alert .close-alert {
+        background: transparent;
+        border: 1px solid #00ff41;
+        color: #00ff41;
+        padding: 8px 16px;
+        margin-top: 15px;
+        cursor: pointer;
+        font-family: 'JetBrains Mono', monospace;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    
+    .terminal-alert .close-alert:hover {
+        background: #00ff41;
+        color: #0a0a0a;
+    }
+    
+    .alert-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .alert-output {
+        color: #00ff41;
+        margin-bottom: 15px;
+        padding-left: 20px;
     }
 `;
 document.head.appendChild(style);

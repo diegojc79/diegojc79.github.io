@@ -7,22 +7,40 @@
     <link rel="stylesheet" href="resources/css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Terminal Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="btn-close"></span>
+                    <span class="btn-minimize"></span>
+                    <span class="btn-maximize"></span>
+                </div>
+                <span class="terminal-title">diego@portfolio:~$</span>
+            </div>
+            <div class="terminal-body">
+                <div id="loading-text" class="loading-text"></div>
+                <div class="cursor-blink">█</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <span>Diego Cordeiro</span>
+                <span class="glitch" data-text="diego@portfolio:~$">diego@portfolio:~$</span>
             </div>
             <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#home" class="nav-link" data-command="./home.sh">[home]</a>
+                <a href="#about" class="nav-link" data-command="./about.sh">[about]</a>
+                <a href="#skills" class="nav-link" data-command="./skills.sh">[skills]</a>
+                <a href="#projects" class="nav-link" data-command="./projects.sh">[projects]</a>
+                <a href="#contact" class="nav-link" data-command="./contact.sh">[contact]</a>
             </div>
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
@@ -34,36 +52,82 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="matrix-bg"></div>
         <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="gradient-text">Full Stack Developer</span>
-                        <br>Building Digital Solutions
-                    </h1>
-                    <p class="hero-description">
-                        Passionate about creating seamless web experiences and turning innovative ideas into reality through clean, efficient code.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            <div class="terminal-hero">
+                <div class="terminal-window main-terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="btn-close"></span>
+                            <span class="btn-minimize"></span>
+                            <span class="btn-maximize"></span>
+                        </div>
+                        <span class="terminal-title">diego@portfolio: ~/developer</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="prompt">diego@portfolio:~$</span>
+                            <span class="command">whoami</span>
+                        </div>
+                        <div class="terminal-output">
+                            <div class="ascii-art">
+    ██████╗ ██╗███████╗ ██████╗  ██████╗ 
+    ██╔══██╗██║██╔════╝██╔════╝ ██╔═══██╗
+    ██║  ██║██║█████╗  ██║  ███╗██║   ██║
+    ██║  ██║██║██╔══╝  ██║   ██║██║   ██║
+    ██████╔╝██║███████╗╚██████╔╝╚██████╔╝
+    ╚═════╝ ╚═╝╚══════╝ ╚═════╝  ╚═════╝ 
+                            </div>
+                            <div class="hero-info">
+                                <div class="info-line"><span class="label">Name:</span> Diego Cordeiro</div>
+                                <div class="info-line"><span class="label">Role:</span> Full Stack Developer</div>
+                                <div class="info-line"><span class="label">Status:</span> <span class="status-active">AVAILABLE</span></div>
+                                <div class="info-line"><span class="label">Location:</span> Ready to Code</div>
+                                <div class="info-line"><span class="label">Passion:</span> Building Digital Solutions</div>
+                            </div>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="prompt">diego@portfolio:~$</span>
+                            <span class="command">ls -la skills/</span>
+                        </div>
+                        <div class="terminal-output skills-preview">
+                            <div class="skill-file">-rwxr-xr-x 1 diego dev 2048 Jan 15 2024 <span class="file-js">javascript.js</span></div>
+                            <div class="skill-file">-rwxr-xr-x 1 diego dev 1024 Jan 15 2024 <span class="file-react">react.jsx</span></div>
+                            <div class="skill-file">-rwxr-xr-x 1 diego dev 3072 Jan 15 2024 <span class="file-node">node.js</span></div>
+                            <div class="skill-file">-rwxr-xr-x 1 diego dev 1536 Jan 15 2024 <span class="file-python">python.py</span></div>
+                        </div>
+                        <div class="terminal-line current-line">
+                            <span class="prompt">diego@portfolio:~$</span>
+                            <span class="command" id="typing-command"></span>
+                            <span class="cursor">█</span>
+                        </div>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <div class="image-container">
-                        <img src="resources/images/headshot.png" alt="Diego Cordeiro" class="profile-img">
-                        <div class="floating-elements">
-                            <div class="floating-icon" style="--delay: 0s">
-                                <i class="fab fa-js-square"></i>
+                <div class="profile-terminal">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="btn-close"></span>
+                                <span class="btn-minimize"></span>
+                                <span class="btn-maximize"></span>
                             </div>
-                            <div class="floating-icon" style="--delay: 1s">
-                                <i class="fab fa-react"></i>
-                            </div>
-                            <div class="floating-icon" style="--delay: 2s">
-                                <i class="fab fa-node-js"></i>
-                            </div>
-                            <div class="floating-icon" style="--delay: 3s">
-                                <i class="fab fa-python"></i>
+                            <span class="terminal-title">profile.img</span>
+                        </div>
+                        <div class="terminal-body profile-body">
+                            <img src="resources/images/headshot.png" alt="Diego Cordeiro" class="profile-img">
+                            <div class="profile-stats">
+                                <div class="stat-line">
+                                    <span class="stat-label">uptime:</span>
+                                    <span class="stat-value" id="uptime">0d 0h 0m</span>
+                                </div>
+                                <div class="stat-line">
+                                    <span class="stat-label">commits:</span>
+                                    <span class="stat-value">1,337+</span>
+                                </div>
+                                <div class="stat-line">
+                                    <span class="stat-label">coffee:</span>
+                                    <span class="stat-value">∞</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -75,49 +139,53 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="about-description">
-                        Hi, I'm Diego Cordeiro—a passionate full stack developer currently mastering my craft through Codecademy's comprehensive program. With hands-on experience in web development and a knack for problem-solving, I specialize in creating robust, user-friendly applications that make a difference.
-                    </p>
-                    <p class="about-description">
-                        My journey in software development is driven by curiosity and a commitment to continuous learning. I enjoy tackling complex challenges and transforming ideas into elegant, functional solutions.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">15+</span>
-                            <span class="stat-label">Projects Completed</span>
+            <div class="section-header">
+                <h2 class="section-title glitch" data-text="cat about.md">cat about.md</h2>
+            </div>
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn-close"></span>
+                        <span class="btn-minimize"></span>
+                        <span class="btn-maximize"></span>
+                    </div>
+                    <span class="terminal-title">about.md - vim</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="vim-content">
+                        <div class="vim-line-numbers">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                            <span>6</span>
+                            <span>7</span>
+                            <span>8</span>
+                            <span>9</span>
+                            <span>10</span>
+                            <span>11</span>
+                            <span>12</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number">3+</span>
-                            <span class="stat-label">Years Learning</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Commitment</span>
+                        <div class="vim-text">
+                            <div class="vim-line"><span class="vim-comment"># Diego Cordeiro - Full Stack Developer</span></div>
+                            <div class="vim-line"></div>
+                            <div class="vim-line"><span class="vim-keyword">const</span> <span class="vim-variable">developer</span> = {</div>
+                            <div class="vim-line">  <span class="vim-property">name</span>: <span class="vim-string">"Diego Cordeiro"</span>,</div>
+                            <div class="vim-line">  <span class="vim-property">role</span>: <span class="vim-string">"Full Stack Developer"</span>,</div>
+                            <div class="vim-line">  <span class="vim-property">education</span>: <span class="vim-string">"Codecademy Full Stack Program"</span>,</div>
+                            <div class="vim-line">  <span class="vim-property">experience</span>: <span class="vim-string">"3+ years learning & building"</span>,</div>
+                            <div class="vim-line">  <span class="vim-property">passion</span>: <span class="vim-string">"Transforming ideas into code"</span>,</div>
+                            <div class="vim-line">  <span class="vim-property">motto</span>: <span class="vim-string">"Ship dreams, debug nightmares!"</span></div>
+                            <div class="vim-line">};</div>
+                            <div class="vim-line"></div>
+                            <div class="vim-line"><span class="vim-comment">// Always learning, always building</span></div>
                         </div>
                     </div>
-                </div>
-                <div class="about-image">
-                    <div class="code-snippet">
-                        <div class="code-header">
-                            <div class="code-dots">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <span class="code-title">developer.js</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><code><span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
-  <span class="code-property">name</span>: <span class="code-string">'Diego Cordeiro'</span>,
-  <span class="code-property">role</span>: <span class="code-string">'Full Stack Developer'</span>,
-  <span class="code-property">skills</span>: [<span class="code-string">'JavaScript'</span>, <span class="code-string">'React'</span>, <span class="code-string">'Node.js'</span>],
-  <span class="code-property">passion</span>: <span class="code-string">'Building amazing things'</span>,
-  <span class="code-property">motto</span>: <span class="code-string">'Ship dreams, debug nightmares!'</span>
-};</code></pre>
-                        </div>
+                    <div class="vim-status-bar">
+                        <span>-- INSERT --</span>
+                        <span>about.md [+]</span>
+                        <span>12,42</span>
                     </div>
                 </div>
             </div>
@@ -127,81 +195,37 @@
     <!-- Skills Section -->
     <section id="skills" class="skills">
         <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3 class="category-title">Frontend</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <i class="fab fa-html5"></i>
-                            <span>HTML5</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-css3-alt"></i>
-                            <span>CSS3</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-js-square"></i>
-                            <span>JavaScript</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-react"></i>
-                            <span>React</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-sass"></i>
-                            <span>Sass</span>
-                        </div>
+            <div class="section-header">
+                <h2 class="section-title glitch" data-text="tree skills/">tree skills/</h2>
+            </div>
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn-close"></span>
+                        <span class="btn-minimize"></span>
+                        <span class="btn-maximize"></span>
                     </div>
+                    <span class="terminal-title">skills/ - file explorer</span>
                 </div>
-                <div class="skill-category">
-                    <h3 class="category-title">Backend</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <i class="fab fa-node-js"></i>
-                            <span>Node.js</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>SQL</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-aws"></i>
-                            <span>Express.js</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-server"></i>
-                            <span>REST APIs</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3 class="category-title">Tools & Others</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <i class="fab fa-git-alt"></i>
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-code"></i>
-                            <span>VS Code</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-figma"></i>
-                            <span>Figma</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-mobile-alt"></i>
-                            <span>Responsive Design</span>
-                        </div>
+                <div class="terminal-body">
+                    <div class="file-tree">
+                        <div class="tree-line">skills/</div>
+                        <div class="tree-line">├── frontend/</div>
+                        <div class="tree-line">│   ├── <span class="file-html">html5.html</span> <span class="skill-level">████████░░</span> 80%</div>
+                        <div class="tree-line">│   ├── <span class="file-css">css3.css</span> <span class="skill-level">█████████░</span> 90%</div>
+                        <div class="tree-line">│   ├── <span class="file-js">javascript.js</span> <span class="skill-level">████████░░</span> 85%</div>
+                        <div class="tree-line">│   ├── <span class="file-react">react.jsx</span> <span class="skill-level">███████░░░</span> 75%</div>
+                        <div class="tree-line">│   └── <span class="file-sass">sass.scss</span> <span class="skill-level">██████░░░░</span> 70%</div>
+                        <div class="tree-line">├── backend/</div>
+                        <div class="tree-line">│   ├── <span class="file-node">node.js</span> <span class="skill-level">███████░░░</span> 75%</div>
+                        <div class="tree-line">│   ├── <span class="file-python">python.py</span> <span class="skill-level">██████░░░░</span> 65%</div>
+                        <div class="tree-line">│   ├── <span class="file-sql">database.sql</span> <span class="skill-level">██████░░░░</span> 70%</div>
+                        <div class="tree-line">│   └── <span class="file-api">express.js</span> <span class="skill-level">███████░░░</span> 75%</div>
+                        <div class="tree-line">└── tools/</div>
+                        <div class="tree-line">    ├── <span class="file-git">git.config</span> <span class="skill-level">████████░░</span> 80%</div>
+                        <div class="tree-line">    ├── <span class="file-github">github.yml</span> <span class="skill-level">███████░░░</span> 75%</div>
+                        <div class="tree-line">    ├── <span class="file-vscode">vscode.json</span> <span class="skill-level">█████████░</span> 90%</div>
+                        <div class="tree-line">    └── <span class="file-figma">figma.design</span> <span class="skill-level">██████░░░░</span> 65%</div>
                     </div>
                 </div>
             </div>
@@ -211,82 +235,141 @@
     <!-- Projects Section -->
     <section id="projects" class="projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
+            <div class="section-header">
+                <h2 class="section-title glitch" data-text="ls -la projects/">ls -la projects/</h2>
+            </div>
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=800" alt="E-commerce Platform">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                <div class="project-terminal">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="btn-close"></span>
+                                <span class="btn-minimize"></span>
+                                <span class="btn-maximize"></span>
                             </div>
+                            <span class="terminal-title">ecommerce-platform/</span>
                         </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">E-commerce Platform</h3>
-                        <p class="project-description">
-                            Full-stack e-commerce solution with user authentication, payment processing, and admin dashboard.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
+                        <div class="terminal-body">
+                            <div class="project-preview">
+                                <img src="https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=800" alt="E-commerce Platform">
+                            </div>
+                            <div class="project-info">
+                                <div class="project-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">cat README.md</span>
+                                </div>
+                                <div class="project-description">
+                                    <h3>E-commerce Platform</h3>
+                                    <p>Full-stack solution with authentication, payments, and admin dashboard.</p>
+                                </div>
+                                <div class="project-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">ls dependencies/</span>
+                                </div>
+                                <div class="tech-stack">
+                                    <span class="tech-tag react">React</span>
+                                    <span class="tech-tag node">Node.js</span>
+                                    <span class="tech-tag mongo">MongoDB</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="#" class="action-btn"><i class="fas fa-external-link-alt"></i> demo</a>
+                                    <a href="#" class="action-btn"><i class="fab fa-github"></i> source</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Task Management App">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                <div class="project-terminal">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="btn-close"></span>
+                                <span class="btn-minimize"></span>
+                                <span class="btn-maximize"></span>
                             </div>
+                            <span class="terminal-title">task-manager/</span>
                         </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Task Management App</h3>
-                        <p class="project-description">
-                            Collaborative task management tool with real-time updates, drag-and-drop functionality, and team collaboration features.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Socket.io</span>
-                            <span class="tech-tag">Express</span>
+                        <div class="terminal-body">
+                            <div class="project-preview">
+                                <img src="https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Task Management App">
+                            </div>
+                            <div class="project-info">
+                                <div class="project-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">cat README.md</span>
+                                </div>
+                                <div class="project-description">
+                                    <h3>Task Management App</h3>
+                                    <p>Real-time collaboration tool with drag-and-drop functionality.</p>
+                                </div>
+                                <div class="project-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">ls dependencies/</span>
+                                </div>
+                                <div class="tech-stack">
+                                    <span class="tech-tag react">React</span>
+                                    <span class="tech-tag socket">Socket.io</span>
+                                    <span class="tech-tag express">Express</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="#" class="action-btn"><i class="fas fa-external-link-alt"></i> demo</a>
+                                    <a href="#" class="action-btn"><i class="fab fa-github"></i> source</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Weather Dashboard">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="project-link"><i class="fab fa-github"></i></a>
+                <div class="project-terminal">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="btn-close"></span>
+                                <span class="btn-minimize"></span>
+                                <span class="btn-maximize"></span>
                             </div>
+                            <span class="terminal-title">weather-dashboard/</span>
                         </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Weather Dashboard</h3>
-                        <p class="project-description">
-                            Interactive weather application with location-based forecasts, data visualization, and responsive design.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">API Integration</span>
-                            <span class="tech-tag">Chart.js</span>
+                        <div class="terminal-body">
+                            <div class="project-preview">
+                                <img src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Weather Dashboard">
+                            </div>
+                            <div class="project-info">
+                                <div class="project-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">cat README.md</span>
+                                </div>
+                                <div class="project-description">
+                                    <h3>Weather Dashboard</h3>
+                                    <p>Interactive weather app with location-based forecasts and data visualization.</p>
+                                </div>
+                                <div class="project-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">ls dependencies/</span>
+                                </div>
+                                <div class="tech-stack">
+                                    <span class="tech-tag js">JavaScript</span>
+                                    <span class="tech-tag api">API</span>
+                                    <span class="tech-tag chart">Chart.js</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="#" class="action-btn"><i class="fas fa-external-link-alt"></i> demo</a>
+                                    <a href="#" class="action-btn"><i class="fab fa-github"></i> source</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="projects-cta">
-                <p>More projects coming soon as I continue my full-stack journey!</p>
-                <a href="https://github.com" class="btn btn-outline" target="_blank">
+            <div class="projects-footer">
+                <div class="terminal-line">
+                    <span class="prompt">diego@portfolio:~/projects$</span>
+                    <span class="command">echo "More projects loading..."</span>
+                </div>
+                <a href="https://github.com" class="github-link" target="_blank">
                     <i class="fab fa-github"></i>
-                    View All Projects
+                    View All Repositories
                 </a>
             </div>
         </div>
@@ -295,49 +378,85 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Let's Work Together</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <p>I'm always interested in new opportunities and exciting projects. Let's discuss how we can bring your ideas to life!</p>
-                    <div class="contact-methods">
-                        <a href="mailto:diegojc@me.com" class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <span>diegojc@me.com</span>
-                        </a>
-                        <a href="tel:7862662808" class="contact-method">
-                            <i class="fas fa-phone"></i>
-                            <span>786-266-2808</span>
-                        </a>
-                        <a href="https://linkedin.com" class="contact-method" target="_blank">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn Profile</span>
-                        </a>
-                        <a href="https://github.com" class="contact-method" target="_blank">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub Profile</span>
-                        </a>
+            <div class="section-header">
+                <h2 class="section-title glitch" data-text="./contact.sh">./contact.sh</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info-terminal">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="btn-close"></span>
+                                <span class="btn-minimize"></span>
+                                <span class="btn-maximize"></span>
+                            </div>
+                            <span class="terminal-title">contact-info.json</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="json-content">
+                                <div class="json-line">{</div>
+                                <div class="json-line">  <span class="json-key">"name"</span>: <span class="json-string">"Diego Cordeiro"</span>,</div>
+                                <div class="json-line">  <span class="json-key">"role"</span>: <span class="json-string">"Full Stack Developer"</span>,</div>
+                                <div class="json-line">  <span class="json-key">"status"</span>: <span class="json-string">"Available for hire"</span>,</div>
+                                <div class="json-line">  <span class="json-key">"contact"</span>: {</div>
+                                <div class="json-line">    <span class="json-key">"email"</span>: <span class="json-string">"diegojc@me.com"</span>,</div>
+                                <div class="json-line">    <span class="json-key">"phone"</span>: <span class="json-string">"786-266-2808"</span>,</div>
+                                <div class="json-line">    <span class="json-key">"linkedin"</span>: <span class="json-string">"linkedin.com/in/diego"</span>,</div>
+                                <div class="json-line">    <span class="json-key">"github"</span>: <span class="json-string">"github.com/diego"</span></div>
+                                <div class="json-line">  },</div>
+                                <div class="json-line">  <span class="json-key">"message"</span>: <span class="json-string">"Let's build something amazing together!"</span></div>
+                                <div class="json-line">}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <div class="contact-form-terminal">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="btn-close"></span>
+                                <span class="btn-minimize"></span>
+                                <span class="btn-maximize"></span>
+                            </div>
+                            <span class="terminal-title">send-message.sh</span>
                         </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <div class="terminal-body">
+                            <form id="contact-form" class="terminal-form">
+                                <div class="form-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">read -p "Name: " name</span>
+                                </div>
+                                <input type="text" id="name" name="name" placeholder="Enter your name..." required>
+                                
+                                <div class="form-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">read -p "Email: " email</span>
+                                </div>
+                                <input type="email" id="email" name="email" placeholder="Enter your email..." required>
+                                
+                                <div class="form-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">read -p "Subject: " subject</span>
+                                </div>
+                                <input type="text" id="subject" name="subject" placeholder="Enter subject..." required>
+                                
+                                <div class="form-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">cat > message.txt</span>
+                                </div>
+                                <textarea id="message" name="message" placeholder="Type your message here..." rows="5" required></textarea>
+                                
+                                <div class="form-line">
+                                    <span class="prompt">$</span>
+                                    <span class="command">./send-message.sh</span>
+                                </div>
+                                <button type="submit" class="terminal-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Execute
+                                </button>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
-                            Send Message
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -346,14 +465,40 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>&copy; <span id="year"></span> Diego Cordeiro. Crafted with passion and code.</p>
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="btn-close"></span>
+                        <span class="btn-minimize"></span>
+                        <span class="btn-maximize"></span>
+                    </div>
+                    <span class="terminal-title">footer.sh</span>
                 </div>
-                <div class="footer-social">
-                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <div class="terminal-body">
+                    <div class="footer-content">
+                        <div class="footer-line">
+                            <span class="prompt">diego@portfolio:~$</span>
+                            <span class="command">echo "© <span id="year"></span> Diego Cordeiro - Crafted with passion and code"</span>
+                        </div>
+                        <div class="footer-output">
+                            © <span id="year-output"></span> Diego Cordeiro - Crafted with passion and code
+                        </div>
+                        <div class="footer-line">
+                            <span class="prompt">diego@portfolio:~$</span>
+                            <span class="command">ls social-links/</span>
+                        </div>
+                        <div class="social-links">
+                            <a href="https://github.com" target="_blank" class="social-link">
+                                <i class="fab fa-github"></i> github
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin"></i> linkedin
+                            </a>
+                            <a href="https://twitter.com" target="_blank" class="social-link">
+                                <i class="fab fa-twitter"></i> twitter
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
