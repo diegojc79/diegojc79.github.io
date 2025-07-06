@@ -413,11 +413,11 @@ function showPortrait() {
       <div id="portraitCard" class="portrait-card bg-gray-900/50 border border-green-500/30 rounded-lg p-6 max-w-md fade-in" style="display: none;">
         <div class="flex items-center gap-4">
           <div class="relative flex-shrink-0">
-            <img id="profileImage" src="public/profile.png" alt="Diego Cordeiro - Full Stack Developer" class="avatar w-[120px] h-[160px] rounded-full border-2 border-green-500 glitch-image object-cover" style="display: none;">
-            <div id="profileFallback" class="avatar w-[120px] h-[160px] rounded-full border-2 border-green-500 glitch-image bg-gray-800 flex items-center justify-center text-green-400 text-4xl font-bold" style="display: none;">
+            <img id="profileImage" src="public/profile.png" alt="Diego Cordeiro - Full Stack Developer" class="avatar w-[120px] h-[160px] border-2 border-green-500 glitch-image object-cover" style="display: none; border-radius: 60px;">
+            <div id="profileFallback" class="avatar w-[120px] h-[160px] border-2 border-green-500 glitch-image bg-gray-800 flex items-center justify-center text-green-400 text-4xl font-bold" style="display: none; border-radius: 60px;">
               DC
             </div>
-            <div class="absolute inset-0 rounded-full border-2 border-cyan-400 opacity-20 animate-pulse"></div>
+            <div class="absolute inset-0 border-2 border-cyan-400 opacity-20 animate-pulse" style="border-radius: 60px;"></div>
           </div>
           <div class="min-w-0">
             <h3 class="text-green-400 font-bold text-lg">Diego Cordeiro</h3>
