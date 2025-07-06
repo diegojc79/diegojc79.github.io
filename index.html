@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Portfolio | Terminal Interface</title>
+    <meta name="description" content="Interactive terminal-style portfolio showcasing full-stack development skills">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', monospace; }
+        
+        /* Custom scrollbar for terminal */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #22c55e; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #16a34a; }
+        
+        /* Terminal text selection */
+        ::selection { background: #22c55e; color: #000; }
+        
+        /* Glitch animations */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        .glitch { animation: glitch 0.3s infinite; }
+        
+        .glitch-image { animation: glitch-subtle 2s infinite; }
+        
+        @keyframes glitch-subtle {
+            0%, 100% { transform: translate(0); filter: contrast(1.1) brightness(1.1); }
+            10% { transform: translate(-1px, 1px); filter: contrast(1.2) brightness(1.2) hue-rotate(5deg); }
+            20% { transform: translate(1px, -1px); filter: contrast(1.1) brightness(1.1); }
+            30% { transform: translate(0); filter: contrast(1.3) brightness(1.0) hue-rotate(-5deg); }
+            40% { transform: translate(1px, 1px); filter: contrast(1.1) brightness(1.1); }
+            50% { transform: translate(-1px, -1px); filter: contrast(1.2) brightness(1.2); }
+            60% { transform: translate(0); filter: contrast(1.1) brightness(1.1); }
+        }
+        
+        .cursor-blink { animation: blink 1s infinite; }
+        @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+        
+        .fade-in { animation: fadeIn 1s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .typewriter { overflow: hidden; white-space: nowrap; }
+    </style>
+</head>
+<body class="bg-black text-green-400 font-mono min-h-screen overflow-hidden">
+    <!-- Matrix background -->
+    <div class="fixed inset-0 opacity-5">
+        <div class="absolute inset-0 bg-gradient-to-b from-green-900/20 to-transparent"></div>
+    </div>
+
+    <!-- Terminal Header -->
+    <div class="sticky top-0 z-10 bg-gray-900 border-b border-green-500/30 px-4 py-2 flex items-center gap-2">
+        <div class="flex gap-2">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+        </div>
+        <div class="flex items-center gap-2 ml-4">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span class="text-sm">diego-portfolio@terminal:~</span>
+        </div>
+        <div class="ml-auto flex items-center gap-4">
+            <button onclick="openLink('https://github.com/diegojc79')" class="text-green-400 hover:text-green-300 p-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </button>
+            <button onclick="openLink('https://www.linkedin.com/in/diegojc79')" class="text-green-400 hover:text-green-300 p-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </button>
+            <button onclick="openContactForm()" class="text-green-400 hover:text-green-300 p-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Terminal Content -->
+    <div id="terminal" class="h-[calc(100vh-60px)] overflow-y-auto p-4 space-y-1" onclick="focusInput()">
+        <div id="output"></div>
+        
+        <!-- Input Line -->
+        <div id="inputLine" class="flex items-center" style="display: none;">
+            <span class="text-cyan-400 mr-2">guest@diego-portfolio:~$</span>
+            <input id="commandInput" type="text" class="bg-transparent border-none text-green-400 font-mono outline-none flex-1" autocomplete="off" spellcheck="false">
+            <span id="cursor" class="ml-1 cursor-blink">█</span>
+        </div>
+    </div>
+
+    <!-- Contact Form Modal -->
+    <div id="contactModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4" style="display: none;">
+        <div class="bg-gray-900 border border-green-500/30 rounded-lg p-6 max-w-md w-full">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-green-400 font-bold text-lg">Secure Contact Form</h3>
+                <button onclick="closeContactForm()" class="text-green-400 hover:text-green-300">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="contactContent">
+                <form id="contactForm" class="space-y-4">
+                    <input type="text" name="name" placeholder="Your Name" required class="w-full bg-black border border-green-500/30 text-green-400 placeholder:text-green-600 p-3 rounded">
+                    <input type="email" name="email" placeholder="Your Email" required class="w-full bg-black border border-green-500/30 text-green-400 placeholder:text-green-600 p-3 rounded">
+                    <input type="text" name="subject" placeholder="Subject" required class="w-full bg-black border border-green-500/30 text-green-400 placeholder:text-green-600 p-3 rounded">
+                    <textarea name="message" placeholder="Your Message" required rows="4" class="w-full bg-black border border-green-500/30 text-green-400 placeholder:text-green-600 p-3 rounded resize-none"></textarea>
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-black font-semibold py-3 rounded">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portrait Modal -->
+    <div id="portraitModal" style="display: none;">
+        <div class="my-4">
+            <div id="portraitLoading" class="text-yellow-400 animate-pulse">Loading portrait...</div>
+            <div id="portraitCard" class="bg-gray-900/50 border border-green-500/30 rounded-lg p-6 max-w-md fade-in" style="display: none;">
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <img src="https://sjc.microlink.io/XO5kXmJzDbSVDAoyTsstrjr4WSsRQ_LaVvyMJ0Qfx3IrtzJNkGVmO9CKgdh89Ywq-wVBpA-GPsye4EZ-K1RFDA.jpeg" alt="Diego Cordeiro - Full Stack Developer" width="120" height="120" class="rounded-full border-2 border-green-500 glitch-image">
+                        <div class="absolute inset-0 rounded-full border-2 border-cyan-400 opacity-20 animate-pulse"></div>
+                    </div>
+                    <div>
+                        <h3 class="text-green-400 font-bold text-lg">Diego Cordeiro</h3>
+                        <p class="text-green-300 text-sm mb-2">Full-Stack Developer</p>
+                        <p class="text-green-200 text-xs mb-3">"Ship dreams, debug nightmares!"</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="border border-green-500 text-green-400 text-xs px-2 py-1 rounded">React</span>
+                            <span class="border border-green-500 text-green-400 text-xs px-2 py-1 rounded">Node.js</span>
+                            <span class="border border-green-500 text-green-400 text-xs px-2 py-1 rounded">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
