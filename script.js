@@ -413,7 +413,7 @@ function showPortrait() {
       <div id="portraitCard" class="portrait-card bg-gray-900/50 border border-green-500/30 rounded-lg p-6 max-w-md fade-in" style="display: none;">
         <div class="flex items-center gap-4">
           <div class="relative flex-shrink-0">
-            <img id="profileImage" src="profile.png" alt="Diego Cordeiro - Full Stack Developer" class="avatar w-[120px] h-[160px] rounded-2xl border-2 border-green-500 glitch-image object-cover" style="display: none;">
+            <img id="profileImage" src="public/profile.png" alt="Diego Cordeiro - Full Stack Developer" class="avatar w-[120px] h-[160px] rounded-2xl border-2 border-green-500 glitch-image object-cover" style="display: none;">
             <div id="profileFallback" class="avatar w-[120px] h-[160px] rounded-2xl border-2 border-green-500 glitch-image bg-gray-800 flex items-center justify-center text-green-400 text-4xl font-bold" style="display: none;">
               DC
             </div>
@@ -486,7 +486,7 @@ function showPortrait() {
       };
 
       // Start loading the image
-      testImage.src = 'profile.png';
+      testImage.src = 'publicprofile.png';
     }
   }, 200);
 
