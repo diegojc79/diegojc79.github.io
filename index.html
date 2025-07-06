@@ -356,18 +356,20 @@
           <div class="flex items-center gap-4">
             <div class="relative flex-shrink-0">
               <img
-                src="public/profile.png"
+                id="profileImage"
+                src="profile.png"
                 alt="Diego Cordeiro - Full Stack Developer"
-                class="avatar w-[120px] h-[120px] rounded-full border-2 border-green-500 glitch-image object-cover"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                class="avatar w-[120px] h-[160px] rounded-2xl border-2 border-green-500 glitch-image object-cover"
+                style="display: none"
               />
               <div
-                class="avatar w-[120px] h-[120px] rounded-full border-2 border-green-500 glitch-image bg-gray-800 flex items-center justify-center text-green-400 text-4xl font-bold"
+                id="profileFallback"
+                class="avatar w-[120px] h-[160px] rounded-2xl border-2 border-green-500 glitch-image bg-gray-800 flex items-center justify-center text-green-400 text-4xl font-bold"
                 style="display: none"
               >
                 DC
               </div>
-              <div class="absolute inset-0 rounded-full border-2 border-cyan-400 opacity-20 animate-pulse"></div>
+              <div class="absolute inset-0 rounded-2xl border-2 border-cyan-400 opacity-20 animate-pulse"></div>
             </div>
             <div class="min-w-0">
               <h3 class="text-green-400 font-bold text-lg">Diego Cordeiro</h3>
